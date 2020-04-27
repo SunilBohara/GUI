@@ -1,0 +1,142 @@
+
+package Gui;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
+public class RegistrationDemo 
+{
+    static JTextField nametextfield;
+    static JTextField mobiletextfield;
+    static JTextArea addresstextarea;
+    static JCheckBox condition;
+    static JButton submit;
+    static JComboBox dobcombobox;
+    static JComboBox monthcombobox;
+    static JComboBox yearcombobox; 
+    static JRadioButton gender_m; 
+    static JRadioButton gender_f; 
+    static JTextArea storingdata;
+    public static void main(String[] args) 
+    {
+        JFrame frameobject = new JFrame("Registration Form");
+        frameobject.setBounds(380, 80, 740, 500);
+        frameobject.setVisible(true);
+        frameobject.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        Container contentpane = frameobject.getContentPane();
+        contentpane.setLayout(null);
+        contentpane.setBackground(Color.pink);
+        
+        JLabel name = new JLabel("Name      ----- ");
+        nametextfield = new JTextField();
+        JLabel mobile = new JLabel("Mobile      ----- ");
+        mobiletextfield = new JTextField();
+        JLabel dob = new JLabel("DOB      ----- ");
+        JLabel gender = new JLabel("Gender      ----- ");
+        JLabel address = new JLabel("Address      ----- ");
+        addresstextarea = new JTextArea();
+        condition = new JCheckBox("I accept all the terms and conditions");
+        submit = new JButton("Submit");
+        gender_m = new JRadioButton("Male");
+        gender_f = new JRadioButton("Female");
+        ButtonGroup bg = new ButtonGroup();
+        bg.add(gender_m);
+        bg.add(gender_f);
+        storingdata = new JTextArea();
+        
+        //Days Combobox
+        String[] days = new String[31];
+        for(int i =0; i<days.length; i++)
+        {
+            days[i] = Integer.toString(i);
+        }
+        dobcombobox = new JComboBox(days);
+        
+        //MonthCombobox
+        String[] month = {"Jan","Feb","Mar","Apr","May","June","July","Agu","Sep","Octo","Nov","Dec"};
+        for(int i =0; i<days.length; i++)
+        {
+            days[i] = Integer.toString(i);
+        }
+        monthcombobox = new JComboBox(month);
+        
+        //Year ComboBox
+        String[] year = new String[70];
+        for(int i = 1951; i<=2020; i++)
+        {
+            year[i-1951] = Integer.toString(i);
+        }
+        yearcombobox = new JComboBox(year);
+        
+        name.setBounds(50, 50, 60, 30);
+        nametextfield.setBounds(150, 50, 150, 25);
+        mobile.setBounds(50, 100, 60, 30);
+        mobiletextfield.setBounds(150, 100, 150, 25);
+        dob.setBounds(50, 150, 60, 30);
+        gender.setBounds(50, 200, 60, 30);
+        gender_m.setBounds(150, 200, 80, 30);
+        gender_f.setBounds(235, 200, 80, 30);
+        address.setBounds(50, 250, 60, 30);
+        addresstextarea.setBounds(150, 250, 230, 50);
+        condition.setBounds(50, 320, 250, 25);
+        submit.setBounds(100, 355, 80, 40);
+        dobcombobox.setBounds(150, 150, 50, 25);
+        monthcombobox.setBounds(215, 150, 100, 25);
+        yearcombobox.setBounds(330,150,60,25);
+        storingdata.setBounds(400, 50, 300, 350);
+        
+        contentpane.add(name);
+        contentpane.add(nametextfield);
+        contentpane.add(mobile);
+        contentpane.add(mobiletextfield);
+        contentpane.add(dob);
+        contentpane.add(gender);
+        contentpane.add(address);
+        contentpane.add(addresstextarea);
+        contentpane.add(condition);
+        contentpane.add(submit);
+        contentpane.add(gender_m);
+        contentpane.add(gender_f);
+        contentpane.add(dobcombobox);
+        contentpane.add(monthcombobox);
+        contentpane.add(yearcombobox);
+        contentpane.add(storingdata);
+        
+        submit.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent source)
+            {
+                submit_action(source);
+            }
+        });
+    }
+    
+    static public void submit_action(ActionEvent source)
+    {
+        if(condition.isSelected()==true)
+        {
+            String name = nametextfield.getText();
+            String mobile = mobiletextfield.getText();
+            String day = (String)dobcombobox.getSelectedItem();
+            String month = (String)monthcombobox.getSelectedItem();
+            String year = (String)yearcombobox.getSelectedItem();
+            String gen = "Male";
+            if(gender_f.isSelected())
+            {
+                gen="Female";
+            }
+            String addresss = addresstextarea.getText();
+            storingdata.setText("Name    "+name+"\nMobile     "+mobile+
+                                 "\nDOB   "+day+"   "+month+"  "+year+
+                                "\nGender    "+gen+"\nAddress   "+addresss);
+            
+        }
+        else
+        {
+            storingdata.setText("Please accept terms and conditions");
+        }
+    }
+    
+}
